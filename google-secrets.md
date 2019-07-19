@@ -10,7 +10,9 @@
 ### Create the gcr-pull-secret
 
 ```bash
-$ kubectl create secret docker-registry gcr-pull-secret --namespace appNs --docker-server=eu.gcr.io --docker-username=_json_key --docker-email=youremail@gmail.com --docker-password="$(cat google-key.json)"
+kubectl create secret docker-registry gcr-pull-secret \
+    --namespace appNs --docker-server=eu.gcr.io --docker-username=_json_key \
+    --docker-email=youremail@gmail.com --docker-password="$(cat google-key.json)"
 ```
 ** Note that this only works in `bash` as powershell doesn't treat the `cat` command well
 
