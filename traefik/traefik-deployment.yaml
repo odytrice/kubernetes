@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: traefik-ingress-controller
+  labels:
+    k8s-app: traefik-ingress-lb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-lb
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-ingress-lb
+        name: traefik-ingress-lb
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      volumes:
+        - name: config
+          configMap:
+            name: traefik-conf
+        - name: acme-disk
+          persistentVolumeClaim:
+            claimName: pv-acme
+      containers:
+      - image: traefik:1.7.7
+        name: traefik-ingress-lb
+        ports:
+        - containerPort: 80
+          hostPort: 80
+        - containerPort: 443
+          hostPort: 443
+        - containerPort: 8080
+          hostPort: 8080
+        volumeMounts:
+        - mountPath: "/config"
+          name: "config"
+        - mountPath: "/acme"
+          name: "acme-disk"
+        args:
+        - --configfile=/config/traefik.toml
+        - --kubernetes
