@@ -28,7 +28,7 @@ data:
             ]
 
     [acme]
-    email = "odytrice@gmail.com"
+    email = "your@email.com"
     storageFile = "/acme/acme.json"
     entryPoint = "https"
     onDemand = true
@@ -38,7 +38,7 @@ data:
       entryPoint = "http"
 
     [[acme.domains]]
-    main = "trebbble.io"
+    main = "mydomain.com"
 
     [api]
       entryPoint = "traefik"
