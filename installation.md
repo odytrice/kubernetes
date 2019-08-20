@@ -120,4 +120,8 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 ## Worker Installation
 
-You need to repeat all the prerequisites above
+You need to repeat all the prerequisites above. If there are no worker nodes i.e. single node installation of Kubernetes, simply untaint the control pane with the following
+
+```bash
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
