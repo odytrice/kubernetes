@@ -12,7 +12,11 @@ Full Video [Setup Kubernetes Cluster Step by Step](https://www.youtube.com/watch
 
 
 ## Master Installation
-1. First we need to update our package source
+1. First we need to escalate priviledges
+```bash
+sudo bash
+```
+2. First we need to update our package source
 
 ```bash
 apt-get update && apt-get install -y apt-transport-https curl
@@ -25,22 +29,15 @@ apt-get install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
 ```
 
-2. Then we need to install the main commands
+3. Then we need to install the main commands
 
 ```bash
 sudo apt-get install docker.io kubeadm kubectl kubelet kubernetes-cni
 ```
 
-Enable Docker
 
+Install and Configure Docker to use `systemd`
 ```bash
-systemctl enable docker.service
-```
-
-Configure Docker to use `systemd`
-
-```bash
-
 # Install Docker CE
 ## Set up the repository:
 ### Install packages to allow apt to use a repository over HTTPS
@@ -75,6 +72,12 @@ mkdir -p /etc/systemd/system/docker.service.d
 # Restart docker.
 systemctl daemon-reload
 systemctl restart docker
+```
+
+Enable Docker
+
+```bash
+systemctl enable docker.service
 ```
 
 Then we need to disable swap
