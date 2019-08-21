@@ -100,14 +100,14 @@ vi /etc/fstab
 kubeadm init
 ```
 
-Copy out the join command
+4. Copy out the join command
 
 ```bash
 # e.g.
 kubeadm join 172.17.223.148:6443 --token mqpui3.rlwk2qz2zvq9amnc --discovery-token-ca-cert-hash sha256:50ca6ffcde8076c39b436cec47eb1b906e058f51928af468d5eb09152fa6fede
 ```
 
-4. Drop Down to a Regular User and install
+5. Drop Down to a Regular User and install
 
 ```bash
 mkdir -p $HOME/.kube
@@ -115,10 +115,18 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-5. Install Weave Overlay Network
+6. Install Weave Overlay Network
 
 ```bash
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+
+7. Setup Default Storage Class. You need to setup a default storage class to provision volumes and fulfill volume claims. You can create a local filesystem storage class with the following
+
+```bash
+kubectl apply -f installation/provisioner.yaml
+
+# Details Here https://github.com/rancher/local-path-provisioner
 ```
 
 ## Worker Installation

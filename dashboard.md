@@ -13,7 +13,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-b
 
 This is the account information that the dashboard will use to access your cluster resources. Typically you want this to be of the `cluster-admin` role
 
-First, create a file called dashboard-admin-user.yaml and paste the following in
+First, create a file called `admin-user.yaml` and paste the following in
 
 ```yaml
 apiVersion: v1
@@ -41,7 +41,7 @@ subjects:
 Then we apply it
 ```bash
 # Install Kubernetes Dashboard User
-kubectl apply -f dashboard-admin-user.yaml
+kubectl apply -f dashboard/admin-user.yaml
 ```
 
 ## Launch the Dashboard and Login
