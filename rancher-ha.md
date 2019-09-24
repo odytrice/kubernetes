@@ -16,26 +16,6 @@ ssh-copy-id username@server
 ssh-copy-id -i ~/.ssh/id_rsa.pub username@server
 ```
 
-First you need to describe your cluster with a `cluster.yaml` file
-
-```yaml
-cluster_name: rancher
-
-nodes:
-  - address: 192.168.1.100
-    internal_address: 192.168.1.100 # Optional if the Machines use a different IP from the Public IP
-    user: ody                       # username. you must have ssh access to the Server
-    role: [controlplane,worker,etcd]
-
-services:
-  etcd:
-    snapshot: true
-    creation: 6h
-    retention: 24h
-  network:
-    plugin: weave
-```
-
 ## 2. Install Docker
 
 Follow the instructions here https://docs.docker.com/install/linux/docker-ce/ubuntu/
@@ -77,6 +57,27 @@ newgrp docker
 
 ## 3. Deploy Cluster
 
+First download `rke` from https://github.com/rancher/rke/releases
+
+Then you need to describe your cluster with a `cluster.yaml` file
+
+```yaml
+cluster_name: rancher
+
+nodes:
+  - address: 192.168.1.100
+    internal_address: 192.168.1.100 # Optional if the Machines use a different IP from the Public IP
+    user: ody                       # username. you must have ssh access to the Server
+    role: [controlplane,worker,etcd]
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+  network:
+    plugin: weave
+```
 ```bash
 rke up --config=".\cluster.yaml"
 ```
