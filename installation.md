@@ -74,11 +74,12 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
-Enable Docker
+Enable Docker. For further information on post docker installation https://docs.docker.com/install/linux/linux-postinstall/
 
 ```bash
 systemctl enable docker.service
 ```
+
 
 Then we need to disable swap
 

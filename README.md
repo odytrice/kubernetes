@@ -7,3 +7,4 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 - [Setup remote Access using x509 Certs](user-access.md)
 - [Setup Traefik Ingress Controller](traefik.md)
 - [Setup Google Kubernetes Secrets](google-secrets.md)
+- [Setup Rancher HA Cluster](rancher-ha.md)
