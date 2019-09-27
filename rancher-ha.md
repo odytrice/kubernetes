@@ -75,8 +75,9 @@ services:
     snapshot: true
     creation: 6h
     retention: 24h
-  network:
-    plugin: weave
+
+network:
+  plugin: weave
 ```
 ```bash
 rke up --config=".\cluster.yaml"
@@ -85,13 +86,7 @@ rke up --config=".\cluster.yaml"
 ### Test Cluster
 
 ```bash
-# bash
-export KUBECONFIG=$(pwd)/kube_config_cluster.yml
-
-# powershell
-$env:KUBECONFIG="$(pwd)\kube_config_cluster.yml"
-
-kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces --kubeconfig kube_config_cluster.yml
 ```
 
 ## 4. Setup Helm
