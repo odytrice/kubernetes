@@ -129,7 +129,7 @@ helm install --name cert-manager --namespace cert-manager --version v0.9.1 jetst
 #### Using LetsEncrypt
 ```bash
 # Install Rancher using LetsEncrypt
-helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt
+helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
 ```
 
 #### Using your own Certificates
