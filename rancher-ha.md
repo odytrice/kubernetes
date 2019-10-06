@@ -78,6 +78,9 @@ services:
 
 network:
   plugin: weave
+
+ingress:
+  provider: nginx
 ```
 ```bash
 rke up --config=".\cluster.yaml"
@@ -123,10 +126,20 @@ helm repo update
 helm install --name cert-manager --namespace cert-manager --version v0.9.1 jetstack/cert-manager
 ```
 ### Install Rancher
+#### Using LetsEncrypt
 ```bash
+# Install Rancher using LetsEncrypt
+helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt
+```
+
+#### Using your own Certificates
+```bash
+# Install Rancher using Your Own Certs
 # Make sure the tls Cert is configured in cattle-system namespace
 kubectl create secret tls tls-rancher-ingress --cert=tls-dev-io.crt --key=tls-dev-io.key --namespace cattle-system
 
-# Install Rancher
-helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.dev.io --set ingress.tls.source=tls-rancher-ingress
+# Install using the Certs
+helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
+
+
 ```
