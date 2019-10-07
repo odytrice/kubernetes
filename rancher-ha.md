@@ -5,7 +5,7 @@ Install Ubuntu on Machines.
   1. Copy your SSH key to Remote machine
   2. Install Docker
   3. Deploy Cluster
-  4. Setup Helm
+  4. Setup Helm 3
   5. Install Rancher
 
 ## 1. Setup Remote SSH
@@ -92,14 +92,11 @@ rke up --config=".\cluster.yaml"
 kubectl get pods --all-namespaces --kubeconfig kube_config_cluster.yml
 ```
 
-## 4. Setup Helm
-```bash
-kubectl -n kube-system create serviceaccount tiller
+## 4. Setup Helm 3
+Just download the binary for your OS and add it to your system Path variable
+https://github.com/helm/helm/releases
 
-kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-
-helm init --service-account tiller
-```
+The full instruction for installing Helm is available here https://v3.helm.sh/docs/intro/install/
 
 ## 5. Install Rancher
 ```bash
@@ -107,7 +104,7 @@ helm init --service-account tiller
 
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 ```
-### (Optional) Install Cert Manager
+### Install Cert Manager
 ```bash
 # Install Cert Manager
 kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
@@ -123,13 +120,21 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Install Cert-Manager Chart
-helm install --name cert-manager --namespace cert-manager --version v0.9.1 jetstack/cert-manager
+# !! Make sure you are in cert-manager namespace
+helm install cert-manager jetstack/cert-manager --version v0.9.1
 ```
 ### Install Rancher
+
+First you need to create the cattle-system namespace
+
+```
+kubectl create namespace cattle-system
+```
+
 #### Using LetsEncrypt
 ```bash
 # Install Rancher using LetsEncrypt
-helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
 ```
 
 #### Using your own Certificates
@@ -139,7 +144,7 @@ helm install rancher-latest/rancher --name rancher --namespace cattle-system --s
 kubectl create secret tls tls-rancher-ingress --cert=tls-dev-io.crt --key=tls-dev-io.key --namespace cattle-system
 
 # Install using the Certs
-helm install rancher-latest/rancher --name rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
 
 
 ```
