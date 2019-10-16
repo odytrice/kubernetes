@@ -14,6 +14,12 @@ Install Ubuntu on Machines.
 # Must strictly run this from bash shell. Either Ubuntu or WSL Ubuntu
 ssh-copy-id username@server
 ssh-copy-id -i ~/.ssh/id_rsa.pub username@server
+
+# For Windows (if .ssh exists)
+cat ~/.ssh/id_rsa.pub | ssh user@server "cat >> ~/.ssh/authorized_keys"
+
+# For Windows (if .ssh doesn't exist)
+cat ~/.ssh/id_rsa.pub | ssh user@server "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 ```
 
 ## 2. Install Docker
