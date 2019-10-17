@@ -8,3 +8,4 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 - [Setup Traefik Ingress Controller](traefik.md)
 - [Setup Google Kubernetes Secrets](google-secrets.md)
 - [Setup Rancher HA Cluster](rancher-ha.md)
+- [Setup Gitlab in Kubernetes](gitlab.md)
