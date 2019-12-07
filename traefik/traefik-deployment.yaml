@@ -11,7 +11,7 @@ spec:
       k8s-app: traefik-ingress-lb
   strategy:
     rollingUpdate:
-      maxUnavailable: 1
+      maxUnavailable: "1"
   template:
     metadata:
       labels:
@@ -26,6 +26,8 @@ spec:
         - name: acme-disk
           persistentVolumeClaim:
             claimName: pv-acme
+          # hostPath:
+          #   path: /acme/disk
       containers:
       - image: traefik:1.7.7
         name: traefik-ingress-lb
@@ -44,3 +46,10 @@ spec:
         args:
         - --configfile=/config/traefik.toml
         - --kubernetes
+        resources:
+          limits:
+            cpu: 200m
+            memory: 30Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi

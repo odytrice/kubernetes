@@ -48,7 +48,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
-Add User to Docker group
+Add User to Docker group (Optional - Unecessary if user is root)
 ```bash
 # Create Docker Group
 sudo groupadd docker

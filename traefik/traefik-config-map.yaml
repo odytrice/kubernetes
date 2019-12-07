@@ -24,7 +24,7 @@ data:
         [entryPoints.traefik.auth]
           [entryPoints.traefik.auth.basic]
             users = [
-              "admin:$apr1$WuTl94mA$YqMe9az8Ut68T4r10EvKR.",
+              "admin:$$apr1$$CnwmOsD2$$B4Yzlh0SebfBCjULQCX3y0",
             ]
 
     [acme]
