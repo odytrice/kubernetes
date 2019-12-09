@@ -71,5 +71,5 @@ then we proceed to the developers machine...
 kubectl config set-credentials developer --client-certificate=developer.crt --client-key=developer.key
 
 # Setup local Context
-kubectl config set-context local --cluster=local-cluster --namespace=trebbble --user=developer
+kubectl config set-context local --cluster=local-cluster --namespace=project --user=developer
 ```
