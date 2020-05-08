@@ -28,33 +28,40 @@ helm install cert-manager jetstack/cert-manager --version v0.9.1
 First, you create a file called `cluster-issuers.yaml` and then paste in the following code. make sure you replace the email placeholders with your own emails
 
 ```yaml
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
 spec:
   acme:
     server: https://acme-staging-v2.api.letsencrypt.org/directory
-    email: [your-email-goes-here]
+    email: user@example.com
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    - http01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      http01:
         ingress:
           class: nginx
 ---
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
 spec:
   acme:
+    # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: [your-email-goes-here]
+    # Email address used for ACME registration
+    email: user@example.com
+    # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-    - http01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      http01:
         ingress:
           class: nginx
 ```
