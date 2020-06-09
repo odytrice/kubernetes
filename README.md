@@ -18,6 +18,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 ## Tools
 - [Setup Helm](helm.md)
 - [Setup Google Kubernetes Pull Secrets](google-secrets.md)
+- [Kubectx and Kubens for Powershell](https://gist.github.com/odytrice/9688c8f4b02c32fc02f4551695ea0bee)
 
 ## Applications
 - [Setup Gitlab in Kubernetes](gitlab.md)
