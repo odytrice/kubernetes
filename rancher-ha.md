@@ -131,16 +131,16 @@ helm install cert-manager jetstack/cert-manager --version v0.9.1
 ```
 ### Install Rancher
 
-First you need to create the cattle-system namespace
+First you need to create the rancher namespace
 
 ```
-kubectl create namespace cattle-system
+kubectl create namespace rancher
 ```
 
 #### Using LetsEncrypt
 ```bash
 # Install Rancher using LetsEncrypt
-helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
+helm install rancher rancher-latest/rancher --namespace rancher --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
 ```
 
 #### Using your own Certificates
