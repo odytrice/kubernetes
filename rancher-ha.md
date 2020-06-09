@@ -126,8 +126,7 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # Install Cert-Manager Chart
-# !! Make sure you are in cert-manager namespace
-helm install cert-manager jetstack/cert-manager --version v0.9.1
+helm install cert-manager jetstack/cert-manager --version v0.9.1 --namespace cert-manager
 ```
 ### Install Rancher
 
