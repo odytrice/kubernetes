@@ -146,11 +146,11 @@ helm install rancher rancher-latest/rancher --namespace rancher --set hostname=r
 #### Using your own Certificates
 ```bash
 # Install Rancher using Your Own Certs
-# Make sure the tls Cert is configured in cattle-system namespace
-kubectl create secret tls tls-rancher-ingress --cert=tls-dev-io.crt --key=tls-dev-io.key --namespace cattle-system
+# Make sure the tls Cert is configured in rancher namespace
+kubectl create secret tls tls-rancher-ingress --cert=tls-dev-io.crt --key=tls-dev-io.key --namespace rancher
 
 # Install using the Certs
-helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
+helm install rancher rancher-latest/rancher --namespace rancher --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
 
 
 ```
