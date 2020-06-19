@@ -3,5 +3,5 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: nfs-dynamic
   annotations:
-    storageclass.kubernetes.io/is-default-class: "false"
+    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: quay.io/nfs-provisioner
