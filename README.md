@@ -11,7 +11,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 - [Setup Cert Manager](cert-manager/Readme.md)
 
 ## Cluster Management
-- [Install the Kubernetes Dashboard](dashboard.md)
+- [Install the Kubernetes Dashboard](dashboard/Readme.md)
 - [Setup remote Access using x509 Certs](user-access.md)
 - [Forcefully Delete Resources and Namespaces](force-delete.md)
 

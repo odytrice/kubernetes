@@ -6,7 +6,7 @@ The [Kubernetes Dashboard](https://kubernetes.io/docs/tasks/access-application-c
 ## Install the Dashboard
 ```bash
 # Install Kubernetes Dashboard
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
 ```
 
 ## Setup Dashboard Service Account
@@ -41,7 +41,7 @@ subjects:
 Then we apply it
 ```bash
 # Install Kubernetes Dashboard User
-kubectl apply -f dashboard/admin-user.yaml
+kubectl apply -f admin-user.yaml
 ```
 
 ## Launch the Dashboard and Login

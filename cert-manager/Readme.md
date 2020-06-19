@@ -5,14 +5,14 @@ Cert Manager allows you to manage SSL Certificates. It automatically handles ren
 ## Installation
 
 ```bash
-# Install Cert Manager
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
-
 # Create Namespace
 kubectl create namespace cert-manager
 
 # Disable Resource Validation
 kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
+
+# Install Cert Manager
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager.crds.yaml
 
 # Add Helm Chart and update Repo
 helm repo add jetstack https://charts.jetstack.io
@@ -20,7 +20,7 @@ helm repo update
 
 # Install Cert-Manager Chart
 # !! Make sure you are in cert-manager namespace
-helm install cert-manager jetstack/cert-manager --version v0.9.1
+helm install cert-manager jetstack/cert-manager --version v0.15.1 --namespace cert-manager
 ```
 
 ## Setup LetsEncrypt Cluster Issuer
