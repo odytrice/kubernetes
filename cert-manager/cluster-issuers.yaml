@@ -1,29 +1,36 @@
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    server: https://acme-staging-v2.api.letsencrypt.org/directory
-    email: [your-email-goes-here]
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: user@example.com
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-    - http01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      http01:
         ingress:
           class: nginx
 ---
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
 spec:
   acme:
+    # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: [your-email-goes-here]
+    # Email address used for ACME registration
+    email: user@example.com
+    # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-    - http01:
+    # An empty 'selector' means that this solver matches all domains
+    - selector: {}
+      http01:
         ingress:
           class: nginx

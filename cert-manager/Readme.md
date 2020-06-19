@@ -82,7 +82,7 @@ kind: Ingress
 metadata:
   name: usermanager
   annotations:
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod  # Specifies the Cluster Issuer to use
+    certmanager.io/cluster-issuer: letsencrypt-prod  # Specifies the Cluster Issuer to use
     kubernetes.io/ingress.class: nginx
 spec:
   tls:
