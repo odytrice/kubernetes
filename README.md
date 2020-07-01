@@ -22,3 +22,5 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 ## Applications
 - [Setup Gitlab in Kubernetes](gitlab.md)
+
+[![Contact me on Codementor](https://www.codementor.io/m-badges/odytrice/find-me-on-cm-b.svg)](https://www.codementor.io/@odytrice?refer=badge)
