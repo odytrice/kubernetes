@@ -38,6 +38,36 @@ data:
           - targets: ['service.namespace.svc.cluster.local:8000']
 ```
 
+### Traefik Example
+If you are using the Traefik ingress controller, you can enable it to spit out logs by adding the metrics config to the Toml config map as shown below in the last two lines
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-conf
+data:
+  traefik.toml: |
+    defaultEntryPoints = ["http","https"]
+    [entryPoints]
+      [entryPoints.http]
+      address = ":80"
+      compress = true
+    ...
+    # These two lines tell traefik to setup an enpoint with promethus metrics on port 8080
+    [metrics]
+    [metrics.prometheus]  
+```
+
+After that you can then configure the prometheus job as follows
+
+```yaml
+- job_name: 'traefik'
+  static_configs:
+  - targets: ['traefik.kube-system.svc.cluster.local:8080']
+```
+
+
 ## 2. Setup Graphana Credentials
 
 In order to login to the Graphana Dashboard, you will need to setup the Username and Password. But these must be encoded in base64. To encode a user name and password and update the `secret.yaml`
