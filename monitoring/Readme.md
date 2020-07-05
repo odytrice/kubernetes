@@ -39,7 +39,7 @@ data:
 ```
 
 ### Traefik Example
-If you are using the Traefik ingress controller, you can enable it to spit out logs by adding the metrics config to the Toml config map as shown below in the last two lines
+If you are using the Traefik ingress controller, you can enable it to spit out logs by adding the metrics config to the Toml config map and the metrics entry point and setup the metrics to use that entry point like the following below
 
 ```yaml
 apiVersion: v1
@@ -48,18 +48,19 @@ metadata:
   name: traefik-conf
 data:
   traefik.toml: |
-    defaultEntryPoints = ["http","https"]
-    [entryPoints]
-      [entryPoints.http]
-      address = ":80"
-      compress = true
     ...
-    # These two lines tell traefik to setup an enpoint with promethus metrics on port 8080
+    # These three lines setup a traefik entrypoint to 8080
+    [entryPoints]
+      [entryPoints.metrics]
+        address = ":8080"      
+    ...
+    # These three lines tell traefik to expose the promethus metrics via the metrics entrypoint
     [metrics]
     [metrics.prometheus]  
+      entryPoint = "metrics"
 ```
 
-After that you can then configure the prometheus job as follows
+After that you can then configure the prometheus job as follows in `prometheus/configmap.yaml`
 
 ```yaml
 - job_name: 'traefik'
