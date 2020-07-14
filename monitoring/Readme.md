@@ -2,10 +2,12 @@
 
 This set of configruation deploys Prometheus which is a Time Series Database and Graphana
 
-To begin you need to clone this repository
+To begin, you need to clone this repository and copy out the `monitoring` directory. You make the necessary updates to the configuration files after which you install it using `kubectl apply`
 
 ## 1. Configure Prometheus to Scrap Services
-You can configure prometheus to collect metrics from services. These services need to have an endpoint where prometheus can collect metrics. To make this work simply go to `prometheus/configmap.yaml`. It will look like the following
+You can configure prometheus to collect metrics from services. These services need to have an endpoint where prometheus can collect metrics. To make this work edit the `prometheus/configmap.yaml` file.
+
+It will look like the following:
 
 ```bash
 apiVersion: v1
@@ -38,40 +40,13 @@ data:
           - targets: ['service.namespace.svc.cluster.local:8000']
 ```
 
-### Traefik Example
-If you are using the Traefik ingress controller, you can enable it to spit out logs by adding the metrics config to the Toml config map and the metrics entry point and setup the metrics to use that entry point like the following below
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: traefik-conf
-data:
-  traefik.toml: |
-    ...
-    # These three lines setup a traefik entrypoint to 8080
-    [entryPoints]
-      [entryPoints.metrics]
-        address = ":8080"      
-    ...
-    # These three lines tell traefik to expose the promethus metrics via the metrics entrypoint
-    [metrics]
-    [metrics.prometheus]  
-      entryPoint = "metrics"
-```
-
-After that you can then configure the prometheus job as follows in `prometheus/configmap.yaml`
-
-```yaml
-- job_name: 'traefik'
-  static_configs:
-  - targets: ['traefik.kube-system.svc.cluster.local:8080']
-```
-
+We will need to modify the scrape_configs to register the applications we want to Prometheus. See the [Traefik Example](#traefik-example) below for an example on how to modify this file
 
 ## 2. Setup Graphana Credentials
 
-In order to login to the Graphana Dashboard, you will need to setup the Username and Password. But these must be encoded in base64. To encode a user name and password and update the `secret.yaml`
+In order to login to the Graphana Dashboard, you will need to setup the Username and Password. But these must be encoded in base64. After you have encoded the username and password respectively, you then update the `grafana/secret.yaml` file.
+
+**NOTE you need to change this before installing the Application**
 
 ```yaml
 apiVersion: v1
@@ -85,9 +60,9 @@ data:
   admin-password: cGFzc3dvcmQ= #password
 ```
 
-You need to generate your own username and password using bash i.e. 
+In order to encode either the username or the password, You simply execute the following using bash i.e.
 
-```bash 
+```bash
 echo -n "securePa55word" | base64
 ```
 
@@ -128,4 +103,34 @@ To Install, Simply run the following from the root of the downloaded repository
 
 ```bash
 kubectl apply -k monitoring
+```
+
+### Traefik Example
+If you are using the Traefik ingress controller, you can enable it to spit out logs by adding the metrics config to the Toml config map and the metrics entry point and setup the metrics to use that entry point like the following below
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-conf
+data:
+  traefik.toml: |
+    ...
+    # These three lines setup a traefik entrypoint to 8080
+    [entryPoints]
+      [entryPoints.metrics]
+        address = ":8080"
+    ...
+    # These three lines tell traefik to expose the promethus metrics via the metrics entrypoint
+    [metrics]
+    [metrics.prometheus]
+      entryPoint = "metrics"
+```
+
+After that you can then configure the prometheus job as follows in `prometheus/configmap.yaml`
+
+```yaml
+- job_name: 'traefik'
+  static_configs:
+  - targets: ['traefik.kube-system.svc.cluster.local:8080']
 ```
