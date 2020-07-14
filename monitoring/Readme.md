@@ -117,12 +117,12 @@ kind: Ingress
 metadata:
   name: grafana
   annotations:
+    # If you are using nginx ingress controller you should change it here
     kubernetes.io/ingress.class: traefik
 spec:
   tls:
   - hosts:
     - grafana.example.com
-    secretName: tls-grafana-example
   rules:
   - host: grafana.example.com
     http:
