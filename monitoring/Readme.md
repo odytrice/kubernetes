@@ -66,18 +66,12 @@ metadata:
 data:
   traefik.toml: |
     ...
-    # These three lines setup a traefik entrypoint to 8080
-    [entryPoints]
-      [entryPoints.metrics]
-        address = ":8080"
-    ...
     # These three lines tell traefik to expose the promethus metrics via the metrics entrypoint
     [metrics]
     [metrics.prometheus]
-      entryPoint = "metrics"
 ```
 
-After this we can now move on to setting up grafana
+Make sure you apply the changes to update the Traefik with the new Metrics setting. After this we can now move on to setting up grafana
 
 ## 2. Setup Graphana Credentials
 
@@ -137,5 +131,6 @@ spec:
 To Install, Simply run the following from the root of the downloaded repository
 
 ```bash
+kubectl create ns monitoring
 kubectl apply -k monitoring
 ```
