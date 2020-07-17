@@ -25,7 +25,9 @@ helm install cert-manager jetstack/cert-manager --version v0.15.1 --namespace ce
 
 ## Setup LetsEncrypt Cluster Issuer
 
-First, you create a file called `cluster-issuers.yaml` and then paste in the following code. make sure you replace the email placeholders with your own emails
+First, you create a file called `cluster-issuers.yaml` and then paste in the following code.
+
+**NOTE** Make sure you replace the email placeholders with your own emails
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -72,9 +74,21 @@ then simply run
 kubectl apply -f cluster-issuers.yaml
 ```
 
-## Setup SSL Certs for Ingress
+You can confirm that it ran successfully but running
 
-To setup SSL simply use the annotation and the tls configuration below
+```bash
+kubectl get clusterissuers
+```
+and you should get the following output
+```
+NAME                  READY   AGE
+letsencrypt-prod      True    58s
+letsencrypt-staging   True    58s
+```
+
+## Deploying SSL Certificates for Ingress
+
+To setup an SSL Certificate simply use the annotation and the tls configuration below
 
 ```yaml
 apiVersion: extensions/v1beta1
