@@ -1,14 +1,21 @@
-# Rancher HA Installation
-Install Ubuntu on Machines.
+# Setup a Kubernetes Cluster using RKE
 
-### Steps:
+## Prerequisites
+**On Premise**
+
+Before you deploy on your On Premise Machines
+Install Ubuntu on Machines. All machines need to be able to ping each other directly using their corresponding IP Address (No NAT or fancy network topolgies)
+
+**Cloud Deployment**
+
+Allocate the Virtual Machines that you will need make sure to setup any private IP Address if applicable as machines in the
+
+## Steps:
   1. Copy your SSH key to Remote machine
   2. Install Docker
   3. Deploy Cluster
-  4. Setup Helm 3
-  5. Install Rancher
 
-## 1. Setup Remote SSH
+### 1. Setup Remote SSH
 
 ```bash
 # Must strictly run this from bash shell. Either Ubuntu or WSL Ubuntu
@@ -22,7 +29,7 @@ cat ~/.ssh/id_rsa.pub | ssh user@server "cat >> ~/.ssh/authorized_keys"
 cat ~/.ssh/id_rsa.pub | ssh user@server "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 ```
 
-## 2. Install Docker
+### 2. Install Docker
 
 Follow the instructions here https://docs.docker.com/install/linux/docker-ce/ubuntu/
 ```bash
@@ -61,7 +68,7 @@ newgrp docker
 ```
 
 
-## 3. Deploy Cluster
+### 3. Deploy Cluster
 
 First download `rke` from https://github.com/rancher/rke/releases
 
@@ -92,64 +99,8 @@ ingress:
 rke up --config=".\cluster.yaml"
 ```
 
-### Test Cluster
+## Test Cluster
 
 ```bash
 kubectl get pods --all-namespaces --kubeconfig kube_config_cluster.yml
-```
-
-## 4. Setup Helm 3
-Just download the binary for your OS and add it to your system Path variable
-https://github.com/helm/helm/releases
-
-The full instruction for installing Helm is available here https://v3.helm.sh/docs/intro/install/
-
-## 5. Install Rancher
-```bash
-# Add Chart
-
-helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
-```
-### Install Cert Manager
-```bash
-# Install Cert Manager
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
-
-# Create Namespace
-kubectl create namespace cert-manager
-
-# Disable Resource Validation
-kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
-
-# Add Helm Chart and update Repo
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-# Install Cert-Manager Chart
-helm install cert-manager jetstack/cert-manager --version v0.9.1 --namespace cert-manager
-```
-### Install Rancher
-
-First you need to create the rancher namespace
-
-```
-kubectl create namespace rancher
-```
-
-#### Using LetsEncrypt
-```bash
-# Install Rancher using LetsEncrypt
-helm install rancher rancher-latest/rancher --namespace rancher --set hostname=rancher.hostname.com --set ingress.tls.source=letsEncrypt --set letsEncrypt.email=me@example.org
-```
-
-#### Using your own Certificates
-```bash
-# Install Rancher using Your Own Certs
-# Make sure the tls Cert is configured in rancher namespace
-kubectl create secret tls tls-rancher-ingress --cert=tls-dev-io.crt --key=tls-dev-io.key --namespace rancher
-
-# Install using the Certs
-helm install rancher rancher-latest/rancher --namespace rancher --set hostname=rancher.hostname.com --set ingress.tls.source=tls-rancher-ingress
-
-
 ```

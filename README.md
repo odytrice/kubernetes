@@ -2,24 +2,34 @@
 Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 ## Installing Clusters
-- [Setup a Cluster from scratch](installation.md)
-- [Setup Rancher HA Cluster](rancher-ha.md)
+- [Setup a Cluster using Kubeadm](installation.md)
+
+- [Setup a Cluster using RKE](rke.md)
+
 
 ## Cluster Essentials
 - [NFS Dynamic Storage Provisioner](nfs-storage/Readme.md)
+
 - [Setup Nginx Ingress Controller](ingress/nginx.md)
+
 - [Setup Traefik Ingress Controller](ingress/traefik.md)
+
 - [Setup Cert Manager](cert-manager/Readme.md)
 
 ## Cluster Management
 - [Install the Kubernetes Dashboard](dashboard/Readme.md)
+
+- [Install Rancher](rancher.md)
+
 - [Monitoring Using Prometheus and Grafana](monitoring/Readme.md)
 - [Setup remote Access using x509 Certs](user-access.md)
 - [Forcefully Delete Resources and Namespaces](force-delete.md)
 
 ## Tools
 - [Setup Helm](helm.md)
+
 - [Setup Google Kubernetes Pull Secrets](google-secrets.md)
+
 - [Kubectx and Kubens for Powershell](kubectx.md)
 
 ## Applications
