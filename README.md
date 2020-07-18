@@ -30,7 +30,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Setup Google Kubernetes Pull Secrets](google-secrets.md)
 
-- [Kubectx and Kubens for Powershell](kubectx.md)
+- [Kubectx and Kubens](kubectx.md)
 
 ## Applications
 - [Setup Gitlab in Kubernetes](gitlab.md)
