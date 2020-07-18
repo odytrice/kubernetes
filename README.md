@@ -2,10 +2,9 @@
 Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 ## Installing Clusters
+- [Setup a Cluster using RKE](rke.md) (Recommended)
+
 - [Setup a Cluster using Kubeadm](installation.md)
-
-- [Setup a Cluster using RKE](rke.md)
-
 
 ## Cluster Essentials
 - [NFS Dynamic Storage Provisioner](nfs-storage/Readme.md)
