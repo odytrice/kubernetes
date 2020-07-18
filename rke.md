@@ -99,6 +99,10 @@ ingress:
 rke up --config=".\cluster.yaml"
 ```
 
+**Note** that if you are deploying your Cluster in one of the popular cloud providers, you will want to consider registering that cloud provider so that your cluster can talk to the cloud environment for things like setting up volumes e.t.c.
+
+[RKE Cloud Provider Configuration](https://rancher.com/docs/rke/latest/en/config-options/cloud-providers/)
+
 ## Test Cluster
 
 ```bash
