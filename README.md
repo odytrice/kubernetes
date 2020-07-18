@@ -8,11 +8,18 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 ## Cluster Essentials
 
-- [NFS Dynamic Storage Provisioner](nfs-storage/Readme.md)
+### Storage
 
+- [NFS Dynamic Storage Provisioner](storage/nfs-storage/Readme.md)
+
+- [Longhorn Dynamic Storage Provisioner](storage/longhorn/Readme.md)
+
+### Ingress
 - [Setup Nginx Ingress Controller](ingress/nginx.md)
 
 - [Setup Traefik Ingress Controller](ingress/traefik.md)
+
+### Others
 
 - [Setup Cert Manager](cert-manager/Readme.md)
 
