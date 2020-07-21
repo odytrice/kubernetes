@@ -18,6 +18,7 @@ If you want to forcefully delete a namespace, It's a bit trickier because as lon
 To fix this, you need to first identify all the objects in the namespace including custom resources. To do that you simply
 run
 
+NOTE: Make sure you run this command in bash as windows adds a `/r` which causes errors
 ```bash
 kubectl api-resources --verbs=list --namespaced -o name  | xargs -n 1 kubectl get --show-kind --ignore-not-found
 ```
