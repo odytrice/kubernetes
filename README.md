@@ -47,5 +47,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Setup Gitlab in Kubernetes](gitlab.md)
 
+- [Dask Gateway for Machine Learning](dask-gateway/Readme.md)
+
 
 [![Contact me on Codementor](https://www.codementor.io/m-badges/odytrice/find-me-on-cm-b.svg)](https://www.codementor.io/@odytrice?refer=badge)

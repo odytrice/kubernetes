@@ -1,0 +1,24 @@
+gateway:
+  auth:
+    type: simple
+    simple:
+      password: <password>
+  backend:
+    scheduler:
+      cores:
+        request: 0.1
+        limit: 0.2
+      memory:
+        request: 100M
+        limit: 200M
+    worker:
+      cores:
+        request: 0.1
+        limit: 0.2
+      memory:
+        request: 100M
+        limit: 200M
+
+traefik:
+  service:
+    type: ClusterIP
