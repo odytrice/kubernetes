@@ -27,7 +27,7 @@ helm install cert-manager jetstack/cert-manager --version v0.15.1 --namespace ce
 
 First, you create a file called `cluster-issuers.yaml` and then paste in the following code.
 
-**NOTE**❗❗ Make sure you replace the email placeholders with your own emails
+**NOTE**❗❗ Make sure you replace the email placeholders **`user@example.com`** with your own emails
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
