@@ -102,7 +102,7 @@ spec:
   tls:
     - hosts:
       - domain.example.com
-      secretName: tls-edelwiess-usermanager  # Secret name is used to dynamically generate the secret
+      secretName: tls-domain-example  # Secret name is used to dynamically generate the secret
   rules:
   - host: domain.example.com
     http:
