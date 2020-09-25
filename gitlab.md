@@ -8,7 +8,10 @@ For the configuration below you need the following to be installed and configure
 - [Nginx Ingress Controller](ingress/nginx.md)
 - [Cert Manager](cert-manager/Readme.md)
 
-You need to have a cluster with a good amount resources. The gitlab team recommends A Kubernetes cluster, version 1.13 or higher. 8vCPU and 30GB of RAM
+You need to have a cluster with a good amount resources. The gitlab team recommends
+- A Kubernetes cluster, version 1.13 or higher.
+- 8vCPU
+- 30GB of RAM
 
 However you can trim it down (see [Pre-Modification](#apply-pre-modifications))
 
