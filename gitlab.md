@@ -1,47 +1,46 @@
-# Gitlab Installation using Helm 3
+# Gitlab Installation
 
 For more details check here https://docs.gitlab.com/charts/installation/deployment.html
 
-```bash
-#Add Gitlab Chart Repo
-helm repo add gitlab https://charts.gitlab.io/
 
-# Update the Repo
-helm repo update
+## Pre-Requisites
+For the configuration below you need the following to be installed and configured
+- [Nginx Ingress Controller](ingress/nginx.md)
+- [Cert Manager](cert-manager/Readme.md)
 
-# Install your wildcard cert
-kubectl create secret tls dev-io-tls --cert=tls-dev-io.crt --key=tls-dev-io.key
+You need to have a cluster with a good amount resources. The gitlab team recommends A Kubernetes cluster, version 1.13 or higher. 8vCPU and 30GB of RAM
 
-# Install Gitlab using helm 3
-helm install gitlab gitlab/gitlab -f HELM_OPTIONS_YAML_FILE
+However you can trim it down (see [Pre-Modification](#apply-pre-modifications))
 
-# Install Gitlab using helm 2
-helm2 install gitlab/gitlab --name gitlab -f ".\gitlab.yaml"
-```
+## Configuration
+You need to create the configuration for you gitlab installation. You will save this in a file called `gitlab.yaml`.
 
-Here is a Sample Yaml Configuration
+For more details see https://docs.gitlab.com/charts/charts/globals.html
 
 ```yaml
-# Configuration Details
-# https://docs.gitlab.com/charts/charts/globals.html
 global:
   edition: ce
   hosts:
-    domain: gitlab.kubebridge.com
+    # base domain
+    domain: example.com
 
   shell:
+    # ssh port for cloning
     port: 2222
 
   pod:
     labels:
+      # applies label to all pods
       environment: prod
 
   deployment:
     annotations:
+      # applies annotation to all deployments
       environment: prod
 
   service:
     annotations:
+      # applies annotation to all services
       environment: prod
 
   ingress:
@@ -102,10 +101,65 @@ prometheus:
       size: 2Gi
 ```
 
-To retrieve the password you use
+## Installation
+
+First you need to ensure you create a namespace and that you are in that namespace
+
+```bash
+kubectl create ns gitlab
+kubectl config set-context --current --namespace gitlab
+```
+Then we can run our helm chart
+
+```bash
+#Add Gitlab Chart Repo
+helm repo add gitlab https://charts.gitlab.io/
+
+# Update the Repo
+helm repo update
+
+# Install Gitlab using helm
+helm install gitlab gitlab/gitlab -f ".\gitlab.yaml"
+```
+Once Installation is done you can retrieve the `root` password with the following command
 
 ```bash
 # <name> should be the name of the gitlab installation i.e. gitlab
 kubectl get secret <name>-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode
+```
+### Apply Pre-Modifications
 
+Even though the helm chart allows you to configure a lot there are still situations where you need to have fine-grained control. For example you want to configure the number of replicas that gets created.
+
+In this case, you will need to output the helm template to a file and then make modifications to that file and when you are okay with the output then you can simply apply the output file.
+
+```bash
+# Template to a yaml file for pre-modifications
+helm template gitlab gitlab/gitlab -f ".\gitlab.yaml" > output.yaml
+
+# After modifications to output.yaml run
+kubectl apply -f output.yaml
+```
+
+## Configure SSH
+In order to get SSH working, first you need to change `global.shell.port` to an port-number between 30000-32767.
+
+After that you run the `helm template` instead and modify the output.yaml file.
+
+You need to change the service `gitlab-shell` type to `NodePort` and then set the nodePort value on the service to a port-number you specified above
+
+And finally you run
+
+```bash
+kubectl apply -f output.yaml
+```
+
+## Uninstallation
+To uninstall gitlab we simply run
+
+```bash
+helm uninstall gitlab
+
+# or if we used pre-modifications
+kubectl delete -f output.yaml
 ```
