@@ -22,28 +22,90 @@ helm2 install gitlab/gitlab --name gitlab -f ".\gitlab.yaml"
 Here is a Sample Yaml Configuration
 
 ```yaml
+# Configuration Details
+# https://docs.gitlab.com/charts/charts/globals.html
 global:
+  edition: ce
   hosts:
-    domain: dev.io
-    externalIP: 172.17.151.181
+    domain: gitlab.kubebridge.com
+
+  shell:
+    port: 2222
+
+  pod:
+    labels:
+      environment: prod
+
+  deployment:
+    annotations:
+      environment: prod
+
+  service:
+    annotations:
+      environment: prod
+
   ingress:
+    class: nginx
     configureCertmanager: false
-    tls:
-      secretName: dev-io-tls
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      acme.cert-manager.io/http01-edit-in-place: "true"
+
+
 certmanager:
   install: false
 
+nginx-ingress:
+  enabled: false
+
 gitlab:
+  webservice:
+    ingress:
+      tls:
+        secretName: gitlab-webservice-tls
   gitaly:
     persistence:
-      size: 10Gi
+      size: 2Gi
+
+registry:
+  ingress:
+    tls:
+      secretName: gitlab-registry-tls
+
 postgresql:
   persistence:
-    size: 8Gi
+    size: 2Gi
 minio:
+  ingress:
+    tls:
+      secretName: gitlab-minio-tls
   persistence:
-    size: 10Gi
+    size: 2Gi
 redis:
   persistence:
-    size: 5Gi
+    size: 2Gi
+
+prometheus:
+  alertmanager:
+    enabled: false
+    persistentVolume:
+      enabled: false
+      size: 2Gi
+  pushgateway:
+    enabled: false
+    persistentVolume:
+      enabled: false
+      size: 2Gi
+  server:
+    persistentVolume:
+      enabled: true
+      size: 2Gi
+```
+
+To retrieve the password you use
+
+```bash
+# <name> should be the name of the gitlab installation i.e. gitlab
+kubectl get secret <name>-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode
+
 ```
