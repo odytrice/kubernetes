@@ -14,8 +14,11 @@ Go to the releases pages (https://github.com/ahmetb/kubectx/releases)
 Download the executables for you application and them to a folder that is registered in your path
 
 ## Usage
-Kubectx
+
+### Kubectx
+
 ![kubectx Demo](https://raw.githubusercontent.com/ahmetb/kubectx/master/img/kubectx-demo.gif)
 
-Kubens
+### Kubens
+
 ![Kubens Demo](https://raw.githubusercontent.com/ahmetb/kubectx/master/img/kubens-demo.gif)
