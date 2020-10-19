@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonarqube
+data:
+  # put sonarqube configuration here
+  # like sonar.host.url=https://sonarqube.domain.com
+  sonar.properties: |
+    sonar.security.realm=none

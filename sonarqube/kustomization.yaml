@@ -1,0 +1,14 @@
+# Adds namespace to all resources.
+namespace: sonarqube
+
+resources:
+- database/secret.yaml
+- database/statefulset.yaml
+- database/service.yaml
+
+- sonarqube/configmap.yaml
+- sonarqube/storage.yaml
+- sonarqube/deployment.yaml
+- sonarqube/service.yaml
+
+- ingress.yaml

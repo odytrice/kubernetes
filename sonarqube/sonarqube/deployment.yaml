@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarqube
+  name: sonarqube
+spec:
+  selector:
+    matchLabels:
+      app: sonarqube
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+    spec:
+      initContainers:
+        - name: increase-vm-max-map
+          image: busybox
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
+          securityContext:
+            privileged: true
+        - name: increase-fd-ulimit
+          image: busybox
+          command: ["sh", "-c", "ulimit -n 65536"]
+          securityContext:
+            privileged: true
+      containers:
+        - name: sonarqube
+          image: sonarqube:8.5-community
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 2048Mi
+          volumeMounts:
+            - mountPath: "/opt/sonarqube/data/"
+              name: sonar-data
+            - mountPath: "/opt/sonarqube/extensions/"
+              name: sonar-extensions
+            - mountPath: "/opt/sonarqube/config/"
+              subPath: sonar.properties
+              name: config
+          env:
+            - name: "SONARQUBE_JDBC_USERNAME"
+              value: sonarqube
+            - name: "SONARQUBE_JDBC_URL"
+              value: "jdbc:postgresql://postgres/sonarqube"
+            - name: "SONARQUBE_JDBC_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+      volumes:
+        - name: sonar-data
+          persistentVolumeClaim:
+            claimName: sonar-data
+        - name: sonar-extensions
+          persistentVolumeClaim:
+            claimName: sonar-extensions
+        - name: config
+          configMap:
+            name: sonarqube
