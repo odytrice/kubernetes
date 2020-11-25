@@ -1,0 +1,5 @@
+# For full details on config see https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner/blob/master/helm/provisioner/values.yaml
+
+classes:
+- name: local-storage
+  hostDir: /storage/local-storage

@@ -1,0 +1,10 @@
+# Adds namespace to all resources.
+namespace: kube-system
+
+resources:
+- storageclass.yaml
+- serviceaccount.yaml
+- configmap.yaml
+- role.yaml
+- role-binding.yaml
+- daemonset.yaml

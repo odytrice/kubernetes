@@ -1,0 +1,15 @@
+# Source: provisioner/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-storage-provisioner-config
+  labels:
+    helm.sh/chart: provisioner-3.0.0
+    app.kubernetes.io/name: provisioner
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: local-storage
+data:
+  storageClassMap: |
+    local-storage:
+      hostDir: /storage/local-storage
+      mountDir: /storage/local-storage
