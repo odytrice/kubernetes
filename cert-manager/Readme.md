@@ -96,7 +96,7 @@ kind: Ingress
 metadata:
   name: usermanager
   annotations:
-    certmanager.io/cluster-issuer: letsencrypt-prod    # Specifies the Cluster Issuer to use
+    cert-manager.io/cluster-issuer: letsencrypt-prod    # Specifies the Cluster Issuer to use
     acme.cert-manager.io/http01-edit-in-place: "true"  # Tells Cert-Manager to override this ingress temporarily
     kubernetes.io/ingress.class: nginx
 spec:
