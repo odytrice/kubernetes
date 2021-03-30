@@ -52,7 +52,10 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update
 
 # Install Docker
-# we need to get the precise version name using apt-cache madison docker-ce and then set it as below
+# we need to get the precise version name
+apt-cache madison docker-ce
+
+# We then set the specific version we want to install
 DockerVersion=5:19.03.13~3-0~ubuntu-bionic
 sudo apt-get install docker-ce=$DockerVersion docker-ce-cli=$DockerVersion containerd.io
 ```
