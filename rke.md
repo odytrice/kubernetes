@@ -34,7 +34,7 @@ cat ~/.ssh/id_rsa.pub | ssh user@server "mkdir ~/.ssh; cat >> ~/.ssh/authorized_
 Follow the instructions here https://docs.docker.com/install/linux/docker-ce/ubuntu/
 ```bash
 # Wipe Docker
-sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove -y docker-ce docker-ce-cli containerd.io 
 
 # Update
 sudo apt-get update
