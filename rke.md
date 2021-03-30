@@ -97,8 +97,17 @@ network:
 ingress:
   provider: nginx
 ```
+
+To create the cluster simply use
+
 ```bash
 rke up --config=".\cluster.yaml"
+```
+
+If you are adding/removing nodes in the cluster, after updating the cluster.yml run the following
+
+```bash
+rke up --config=".\cluster.yaml" --update-only
 ```
 
 **Note** that if you are deploying your Cluster in one of the popular cloud providers, you will want to consider registering that cloud provider so that your cluster can talk to the cloud environment for things like setting up volumes e.t.c.
