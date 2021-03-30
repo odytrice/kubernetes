@@ -57,7 +57,7 @@ apt-cache madison docker-ce
 
 # We then set the specific version we want to install
 DockerVersion=5:19.03.13~3-0~ubuntu-bionic
-sudo apt-get install docker-ce=$DockerVersion docker-ce-cli=$DockerVersion containerd.io
+sudo apt-get install -y docker-ce=$DockerVersion docker-ce-cli=$DockerVersion containerd.io
 ```
 
 Add User to Docker group (Optional - Unecessary if user is root)
