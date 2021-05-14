@@ -69,4 +69,4 @@ After it's been deployed, you can simply run
 ```bash
 kubectl get svc nginx-ingress --namespace=nginx-ingress
 ```
-to get the IP Address of the loadbalancer. You need to make all domains you want served by the ingress controller to this IP Address
+to get the IP Address of the loadbalancer. You need to point all domains you want serve by the ingress controller to this IP Address
