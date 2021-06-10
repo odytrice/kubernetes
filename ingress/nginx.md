@@ -7,7 +7,7 @@ Nginx Ingress controller
 To quickly install the ingress controller simply run the following
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.35.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.47.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
 details here https://kubernetes.github.io/ingress-nginx/deploy/
