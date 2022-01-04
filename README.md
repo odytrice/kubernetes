@@ -12,7 +12,9 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Local Volume Storage Provisioner](storage/local-volume/Readme.md)
 
-- [NFS Dynamic Storage Provisioner](storage/nfs-storage/Readme.md)
+- [NFS Dynamic Storage Provisioner (Legacy)](storage/nfs-storage/Readme.md)
+
+- [NFS External Dynamic Storage Provisioner](storage/nfs-external-storage/Readme.md)
 
 - [Longhorn Dynamic Storage Provisioner](storage/longhorn/Readme.md)
 

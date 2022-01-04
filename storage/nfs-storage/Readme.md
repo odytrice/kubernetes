@@ -1,5 +1,8 @@
 # NFS Dynamic Storage Provisioner
 
+#### **❗❗ This is now deprecated in favor of [NFS External Storage Provisioner](../nfs-external-storage/Readme.md)**
+
+## Introduction
 This Provisions an NFS Server inside of your cluster. The twist here is that it deploys it strictly on your master node which is already holding your etcd data anyway. Ultimately, this means than when PVCs are requested, this provisioner creates a directory under `/storage/dynamic` on your master node and stores whatever data it gets over the network. This makes the storage Node Failure Resistant i.e. even if the Node completely crashes or is completely replaced, you will not lose data. However, __the crashing of the master node itself will result in permanent data loss__. That said, crashing the master node is virtually the same as crashing the cluster. So this just means you should backup the master node regularly
 
 ## Installation
