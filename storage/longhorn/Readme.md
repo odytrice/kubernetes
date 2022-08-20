@@ -11,7 +11,7 @@ See [Documentation](https://longhorn.io/docs/) for more information
 Simply Run
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.3.1/deploy/longhorn.yaml
 ```
 
 To Ensure that Everything is working
