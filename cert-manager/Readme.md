@@ -2,7 +2,7 @@
 
 Cert Manager allows you to manage SSL Certificates. It automatically handles renewals and what not after you setup a Cluster Issuer
 
-## Installation
+## Installation using Helm
 
 ```bash
 # Create Namespace
@@ -22,6 +22,16 @@ helm repo update
 # !! Make sure you are in cert-manager namespace
 helm install cert-manager jetstack/cert-manager --version v0.15.1 --namespace cert-manager
 ```
+
+## Installation using Kubectl
+
+Simply run the following
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+```
+
+❗ To Delete This you must first delete the resources without the CRDs first otherwise, It will make an absolute mess as the remaining resources will refuse to delete because the CRDS that describe them no longer exist
 
 ## Setup LetsEncrypt Cluster Issuer
 
