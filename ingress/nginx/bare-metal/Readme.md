@@ -4,7 +4,7 @@ In order to deploy Nginx on Bare Metal clusters, There are [some considerations]
 
 1. **Make use of `hostNetwork: true` or use `hostPort`**: This will make ports on the container map to ports on the Host itself
 2. **Switch from Deployment to Daemonset**: Because we are taking the ports on the host, there can only be on nginx pod on each Node. So using a Daemonset also ensures that adding new nodes contain new deployments of the ingress pod
-3. **Change the dnsPolicy for the pod to use `ClusterFirstWithHostNet`** - This will allow pods that are maked as `hostNetwork: true` to still resolve in cluster DNS Names
+3. **Change the dnsPolicy for the pod to use `ClusterFirstWithHostNet`** - This will allow pods that are maked as `hostNetwork: true` to still resolve in cluster DNS Names (See [docs](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy))
 
 For the deployment I have prepared a set of kubectl files from [Ingress-Nginx Baremetal Manfiest](https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml)
 

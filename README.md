@@ -44,7 +44,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Setup Helm](helm.md)
 
-- [Setup Google Kubernetes Pull Secrets](google-secrets.md)
+- [Setup Private Docker Registry](pull-secrets.md)
 
 - [Kubectx and Kubens](kubectx.md)
 
