@@ -19,7 +19,8 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 - [Longhorn Dynamic Storage Provisioner](storage/longhorn/Readme.md)
 
 ### Ingress
-- [Setup Nginx Ingress Controller](ingress/nginx.md)
+- [Setup Nginx Ingress Controller](ingress/nginx/Readme.md)
+    - [Bare Metal Deployment](ingress/nginx/bare-metal/Readme.md)
 
 - [Setup Traefik Ingress Controller](ingress/traefik.md)
 

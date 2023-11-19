@@ -1,0 +1,15 @@
+# Adds namespace to all resources.
+namespace: ingress-nginx
+
+resources:
+- service-accounts.yaml
+- roles.yaml
+- cluster-roles.yaml
+- role-bindings.yaml
+- cluster-rolebindings.yaml
+- config-map.yaml
+- services.yaml
+- daemonset.yaml
+- jobs.yaml
+- ingress-class.yaml
+- validating-webhooks.yaml
