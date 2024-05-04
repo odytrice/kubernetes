@@ -30,13 +30,21 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 ## Cluster Management
 
-- [Install the Kubernetes Dashboard](dashboard/Readme.md)
+### User Management
+
+- [Setup remote Access using x509 Certs](user-management/generic.md)
+
+- [Setup Access Control for Rancher (RKE)](user-management/rke.md)
+
+### Others
 
 - [Install Rancher](rancher.md)
 
+- [Install the Kubernetes Dashboard](dashboard/Readme.md)
+
 - [Monitoring Using Prometheus and Grafana](monitoring/Readme.md)
 
-- [Setup remote Access using x509 Certs](user-access.md)
+
 
 - [Forcefully Delete Resources and Namespaces](force-delete.md)
 
