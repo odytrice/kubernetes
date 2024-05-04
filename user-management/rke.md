@@ -39,5 +39,25 @@ The script will do the following
 
 1. Create new Public/Private Key pair for the User ("username")
 2. Extract the Kubernetes Certificates
-3. Sign the User's credential with the cluster Credentails
-4. Store everything into a `kube.config` file that you can either use directly or graft into your existing config at `~/.kube/config`
+3. Sign the User's credential with the cluster Credentials
+
+### Apply the Configuration
+
+By default the script stores the credentials a `kube.config` file. You can either use directly or graft into your existing config at `~/.kube/config`
+
+
+If you want update your kube config directly you should set the `$cluster` and `$username` variables can execute the following
+
+
+```bash
+# Setup Variables
+cluster="<clustername>"
+username="<username>"
+user_path="./accounts/$username"
+
+# Add Credentials to kube config
+kubectl config set-credentials $username --client-certificate="$user_path/user.crt" --client-key="$user_path/user.key" --embed-certs
+
+# Setup local Context to kube config
+kubectl config set-context "$username-context" --cluster=$cluster --namespace=default --user=$username
+```

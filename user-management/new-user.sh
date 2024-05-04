@@ -1,5 +1,6 @@
 #!/bin/bash
 username=$1
+cluster=${1-cluster}
 
 
 ca_certs_path="./keys/ca"
@@ -57,4 +58,4 @@ echo "Register User Credentials with kubectl"
 kubectl config set-credentials $username --client-certificate="$user_path/user.crt" --client-key="$user_path/user.key" --embed-certs --kubeconfig kube.config
 
 # Setup local Context
-kubectl config set-context "$username-context" --cluster=xeon --namespace=default --user=$username --kubeconfig kube.config
+kubectl config set-context "$username-context" --cluster=$cluster --namespace=default --user=$username --kubeconfig kube.config
