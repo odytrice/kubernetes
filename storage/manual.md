@@ -1,6 +1,3 @@
----
-reference: https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
----
 
 # Manual Storage Provisioning
 
@@ -24,7 +21,7 @@ metadata:
   name: manual
 provisioner: kubernetes.io/no-provisioner
 allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
 ```
 
 Next we create the Yaml file for the Persistent Volume
