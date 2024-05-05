@@ -15,6 +15,18 @@ First we create the folder
 mkdir /mnt/storage/task-volume
 ```
 
+The we create the storage class
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: manual
+provisioner: kubernetes.io/no-provisioner
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+```
+
 Next we create the Yaml file for the Persistent Volume
 
 ```yaml
@@ -35,6 +47,7 @@ spec:
 ```
 
 Pay attention to the `storageClassName` as that will be necessary to match Persistent Volume Claims.
+
 
 You can then create persistent volume claim with the following.
 
