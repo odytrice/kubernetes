@@ -76,7 +76,6 @@ You can put it all together into a script that creates a new namespace, pull-sec
 
 ```bash
 #!/bin/bash
-#!/bin/bash
 namespace=$1
 
 username=<docker-username>
