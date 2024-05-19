@@ -68,3 +68,27 @@ kubectl create secret generic google-storage --from-file=key.json=google-storage
 ```
 
 just make sure that the `google-storage` secret is mounted properly into your pods for access
+
+
+## Sample Script
+
+You can put it all together into a script that creates a new namespace, pull-secret and configures the service account
+
+```bash
+#!/bin/bash
+#!/bin/bash
+namespace=$1
+
+username=<docker-username>
+password=<docker-password>
+email=<docker-email>
+
+echo "Creating Namespace $namespace"
+kubectl create ns $namespace
+
+echo "Create DockerHub Image Pull Secret in $namespace namespace"
+kubectl create secret docker-registry docker-pull-secret --docker-server=https://index.docker.io/v1/ --docker-username=$username --docker-password=$password --docker-email=$email -n $namespace
+
+echo "Patch $namespace Default Service Account"
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "docker-pull-secret"}]}' -n $namespace
+```
