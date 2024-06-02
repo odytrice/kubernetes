@@ -24,7 +24,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 - [Setup Nginx Ingress Controller](ingress/nginx/Readme.md)
     - [Bare Metal Deployment](ingress/nginx/bare-metal/Readme.md)
 
-- [Setup Traefik Ingress Controller](ingress/traefik.md)
+- [Setup Traefik Ingress Controller](ingress/traefik/Readme.md)
 
 ### Others
 
