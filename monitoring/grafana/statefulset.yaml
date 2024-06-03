@@ -2,7 +2,7 @@ apiVersion:  apps/v1
 kind: StatefulSet
 metadata:
   name: grafana
-  labels: 
+  labels:
     k8s-app: grafana
     app.kubernetes.io/component: grafana
 spec:
@@ -34,7 +34,7 @@ spec:
         - name: grafana
           # The main Grafana container, which uses the `grafana/grafana:6.0.1` image
           # from https://hub.docker.com/r/grafana/grafana
-          image: grafana/grafana:6.0.1
+          image: grafana/grafana:11.0.0
           imagePullPolicy: Always
           # Mount in all the previously defined ConfigMaps as `volumeMounts`
           # as well as the Grafana data volume

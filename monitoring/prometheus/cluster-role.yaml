@@ -1,0 +1,28 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: monitoring
+rules:
+- apiGroups: [""]
+  resources:
+  - pods
+  - nodes
+  - services
+  - serviceendpoints
+  - serviceaccounts
+  - namespaces
+  - resourcequotas
+  - limitranges
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources:
+  - secrets
+  verbs: ["get"] # Limited access to secrets for specific use cases
+- apiGroups: ["extensions"] # Assuming pre-v1 API server
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"] # Assuming v1 API server
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]

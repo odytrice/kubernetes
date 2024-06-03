@@ -37,6 +37,7 @@ https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
 
 
 ```yaml
+# docs https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
 deployment:
   # DaemonSet ensures that there is only 1 pod per node
   kind: DaemonSet
@@ -49,6 +50,10 @@ ports:
   websecure:
     port: 443
     hostPort: 443
+  metrics:
+    port: 9100
+    expose:
+      default: true
 ```
 
 To see what it generates you can simply run

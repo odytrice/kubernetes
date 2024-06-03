@@ -3,13 +3,20 @@ kind: Kustomization
 
 namespace: monitoring
 
+configMapGenerator:
+  - name: prometheus
+    files:
+      - prometheus/prometheus.yml
+
 resources:
+  - prometheus/cluster-role.yaml
+  - prometheus/cluster-role-binding.yaml
   - prometheus/service.yaml
-  - prometheus/configmap.yaml
   - prometheus/statefulset.yaml
 
   - grafana/secret.yaml
-  - grafana/ingress.yaml
   - grafana/service.yaml
   - grafana/configmap.yaml
   - grafana/statefulset.yaml
+
+  - ingress.yaml

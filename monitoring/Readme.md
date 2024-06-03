@@ -79,6 +79,18 @@ data:
 
 Make sure you apply the changes to update the Traefik with the new Metrics setting. After this we can now move on to setting up grafana
 
+
+### Service Discovery
+
+You can now also add configure a service for scraping by simply adding the following labels to your service
+
+https://github.com/prometheus/prometheus/blob/release-2.52/documentation/examples/prometheus-kubernetes.yml
+
+```yaml
+prometheus.io/scrape: true
+prometheus.io/path: /metrics
+```
+
 ## 2. Setup Graphana Credentials
 
 In order to login to the Graphana Dashboard, you will need to setup the Username and Password. But these must be encoded in base64.
