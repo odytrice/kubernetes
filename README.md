@@ -38,15 +38,17 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Setup Access Control for Rancher (RKE)](user-management/rke.md)
 
-### Others
-
-- [Install Rancher](rancher.md)
+### Monitoring
 
 - [Install the Kubernetes Dashboard](dashboard/Readme.md)
 
-- [Monitoring Using Prometheus and Grafana](monitoring/Readme.md)
+- [Monitoring Using Prometheus and Grafana](monitoring/manual/Readme.md)
 
+- [Using Kube Prometheus Stack](monitoring/operator/Readme.md)
 
+### Others
+
+- [Install Rancher](rancher.md)
 
 - [Forcefully Delete Resources and Namespaces](force-delete.md)
 
