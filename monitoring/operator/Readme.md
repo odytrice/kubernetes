@@ -75,7 +75,7 @@ Install using
 
 ```bash
 # Install with preset values
-helm install prometheus prometheus-community/kube-prometheus-stack -namespace monitoring -f values.yaml
+helm install prometheus prometheus-community/kube-prometheus-stack -f values.yaml
 ```
 
 You can listen to services using a service monitor
