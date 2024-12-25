@@ -46,7 +46,23 @@ longhorn-manager-p5h2q                     1/1     Running   0          2m14s
 longhorn-ui-8486987944-lz8s5               1/1     Running   0          2m12s
 ```
 
-If not, you need to wait until all the pods are running
+### Troubleshooting
+If not, you need to wait until all the pods are running.
+
+if `longhorn-manager` is crashing due to
+
+```
+ERRO[0000] Failed environment check, please make sure you have iscsiadm/open-iscsi installed on the host
+FATA[0000] Error starting manager: Environment check failed: Failed to execute: nsenter [--mount=/host/proc/1/ns/mnt --net=/host/proc/1/ns/net iscsiadm --version], output nsenter: failed to execute iscsiadm: No such file or directory
+, error exit status 1
+```
+
+You might need to install open-iscsi. To install simply run
+
+```bash
+sudo apt-get update
+sudo apt-get install -y open-iscsi
+```
 
 You can confirm that it has been installed using
 ```bash
