@@ -20,6 +20,12 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Manual Storage Provisioning](storage/manual.md)
 
+### Backup
+
+- [Longhorn Backup to S3](storage/longhorn/backup.md)
+
+- [Cluster Backup with Velero](storage/backup.md)
+
 ### Ingress
 - [Setup Nginx Ingress Controller](ingress/nginx/Readme.md)
     - [Bare Metal Deployment](ingress/nginx/bare-metal/Readme.md)
@@ -68,5 +74,7 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [SonarQube](sonarqube/Readme.md)
 
+
+[![Buy Me Coffee 🙏](images/buymecoffee.gif)](https://buymeacoffee.com/odytrice)
 
 [![Contact me on Codementor](https://www.codementor.io/m-badges/odytrice/find-me-on-cm-b.svg)](https://www.codementor.io/@odytrice?refer=badge)
