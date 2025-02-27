@@ -119,3 +119,10 @@ spec:
     - default
     - webapp
 ```
+
+### Deleting Backups
+
+Use the following commands to delete Velero backups and data:
+
+`kubectl delete backup <backupName> -n <veleroNamespace>` will delete the backup custom resource only and will not delete any associated data from object/block storage
+`velero backup delete <backupName> -n <veleroNamespace>` will delete the backup resource including all data in object/block storage
