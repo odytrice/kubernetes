@@ -85,3 +85,42 @@ and then you mark longhorn as the default storage class
 ```bash
 kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
+
+
+## Troubleshooting
+
+Longhorn requires that your nodes support ISCSI protocol. Without it, you will get errors like the following `Error starting manager: Failed environment check, please make sure you have iscsiadm/open-iscsi installed on the host`
+
+### How to Install the iSCSI Tool 🔧
+
+You'll need to SSH into each node (master and worker) and run the appropriate command for your Linux distribution.
+
+```bash
+# For Debian / Ubuntu
+sudo apt-get update
+sudo apt-get install open-iscsi -y
+
+# For RHEL / CentOS / Fedora:
+sudo yum install iscsi-initiator-utils -y
+# Or on newer systems using dnf
+# sudo dnf install iscsi-initiator-utils -y
+
+# For SUSE / SLES:
+sudo zypper install open-iscsi
+
+## Enable and Start the Service
+# After installing the package, it's a good practice to ensure the iSCSI service is enabled and running.
+
+sudo systemctl enable iscsid
+sudo systemctl start iscsid
+```
+
+## Final Step
+
+Once you have installed the package on all your nodes, you can either wait for Kubernetes to restart the failed Longhorn pods or you can force it to happen immediately.
+
+To force a restart, delete the failing longhorn-manager pods. Kubernetes will automatically recreate them, and this time the environment check should pass. ✅
+
+```bash
+kubectl -n longhorn-system delete pod <name-of-failing-longhorn-manager-pod>
+```
