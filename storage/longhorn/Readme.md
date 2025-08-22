@@ -46,8 +46,10 @@ longhorn-manager-p5h2q                     1/1     Running   0          2m14s
 longhorn-ui-8486987944-lz8s5               1/1     Running   0          2m12s
 ```
 
-### Troubleshooting
 If not, you need to wait until all the pods are running.
+
+## Troubleshooting
+
 
 if `longhorn-manager` is crashing due to
 
@@ -58,42 +60,6 @@ FATA[0000] Error starting manager: Environment check failed: Failed to execute: 
 ```
 
 You might need to install open-iscsi. To install simply run
-
-```bash
-sudo apt-get update
-sudo apt-get install -y open-iscsi
-```
-
-You can confirm that it has been installed using
-```bash
-kubectl get storageclass
-```
-
-and you should see a storage class called longhorn
-
-## Make Longhorn the Default Storage Class
-
-First you need to mark the other storage classes if any as non-default. replace `$storageclass` with the name of the storage class (e.g. nfs-provisioner) and then apply the following
-
-NOTE: you must use bash because of the quotes. otherwise, you have to put a backslash (\\) in front of every quote (")
-
-```bash
-kubectl patch storageclass $storageclass -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
-
-and then you mark longhorn as the default storage class
-```bash
-kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-```
-
-
-## Troubleshooting
-
-Longhorn requires that your nodes support ISCSI protocol. Without it, you will get errors like the following `Error starting manager: Failed environment check, please make sure you have iscsiadm/open-iscsi installed on the host`
-
-### How to Install the iSCSI Tool 🔧
-
-You'll need to SSH into each node (master and worker) and run the appropriate command for your Linux distribution.
 
 ```bash
 # For Debian / Ubuntu
@@ -115,12 +81,33 @@ sudo systemctl enable iscsid
 sudo systemctl start iscsid
 ```
 
-## Final Step
-
 Once you have installed the package on all your nodes, you can either wait for Kubernetes to restart the failed Longhorn pods or you can force it to happen immediately.
 
 To force a restart, delete the failing longhorn-manager pods. Kubernetes will automatically recreate them, and this time the environment check should pass. ✅
 
 ```bash
 kubectl -n longhorn-system delete pod <name-of-failing-longhorn-manager-pod>
+```
+
+
+You can confirm that it has been installed using
+```bash
+kubectl get storageclass
+```
+
+and you should see a storage class called longhorn
+
+## Make Longhorn the Default Storage Class
+
+First you need to mark the other storage classes if any as non-default. replace `$storageclass` with the name of the storage class (e.g. nfs-provisioner) and then apply the following
+
+NOTE: you must use bash because of the quotes. otherwise, you have to put a backslash (\\) in front of every quote (")
+
+```bash
+kubectl patch storageclass $storageclass -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+and then you mark longhorn as the default storage class
+```bash
+kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
