@@ -34,7 +34,7 @@ cat ~/.ssh/id_rsa.pub | ssh user@server "mkdir ~/.ssh; cat >> ~/.ssh/authorized_
 Follow the instructions here https://docs.docker.com/install/linux/docker-ce/ubuntu/
 ```bash
 # Wipe Docker
-sudo apt-get remove -y docker-ce docker-ce-cli containerd.io 
+sudo apt-get remove -y docker-ce docker-ce-cli containerd.io
 
 # Update
 sudo apt-get update
@@ -95,10 +95,10 @@ services:
     retention: 24h
 
 network:
-  plugin: weave
+  plugin: canal
 
 ingress:
-  provider: nginx
+  provider: none # Or nginx
 ```
 
 To create the cluster simply use
