@@ -30,6 +30,8 @@ kubectl apply -k .
 
 Istio is a service mesh that provides core functionality for Kubeflow, including traffic management, security, and observability. It is installed as a prerequisite for the other components.
 
+For detailed installation instructions, troubleshooting, and configuration options, see the [Istio Installation Guide](istio/Readme.md).
+
 ### Kubeflow Dashboard
 
 The Central Dashboard for Kubeflow.

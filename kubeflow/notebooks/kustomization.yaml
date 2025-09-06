@@ -1,4 +1,4 @@
 namespace: kube-flow
 resources:
   - github.com/kubeflow/manifests/apps/jupyter/notebook-controller/upstream/overlays/kubeflow?ref=v1.8.0
-  - github.com/kubeflow/manifests/apps/jupyter/jupyter-web-app/upstream/overlays/istio?ref=v1.8.0
+  - github.com/kubeflow/manifests/apps/jupyter/jupyter-web-app/upstream/base?ref=v1.8.0
