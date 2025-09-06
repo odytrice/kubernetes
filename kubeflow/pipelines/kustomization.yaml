@@ -1,0 +1,4 @@
+namespace: kube-flow
+resources:
+  - github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=2.2.0
+  - github.com/kubeflow/pipelines/manifests/kustomize/env/dev?ref=2.2.0
