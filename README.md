@@ -74,6 +74,8 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [SonarQube](sonarqube/Readme.md)
 
+- [Kubeflow](kubeflow/Readme.md)
+
 
 [![Buy Me Coffee 🙏](images/buymecoffee.gif)](https://buymeacoffee.com/odytrice)
 
