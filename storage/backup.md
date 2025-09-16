@@ -81,9 +81,32 @@ kubectl delete -f ../../my-app.yaml
 ssh -i ../../kubemaster.privkey  vagrant@192.168.1.52 rm /k8s/webapp/index.html
 ```
 ## Restore the app
+
+First you list the backups available using
+
+```
+velero backup get
+```
+
+you will see something like the following
+
 ```bash
-./velero restore create --from-backup webapp
-kubectl get svc
+NAME                        STATUS            ERRORS   WARNINGS   CREATED                         EXPIRES   STORAGE LOCATION   SELECTOR
+daily-20250915030007   Completed         0        0          2025-09-14 20:00:07 -0700 PDT   28d       default            <none>
+daily-20250914030005   Completed         0        0          2025-09-13 20:00:05 -0700 PDT   27d       default            <none>
+daily-20250913030003   Completed         0        0          2025-09-12 20:00:03 -0700 PDT   26d       default            <none>
+```
+
+The you restore your backup using
+
+```bash
+./velero restore create --from-backup daily-20250915030007
+```
+
+Or You can also restore specific namespaces
+
+```bash
+./velero restore create --from-backup webapp --include-namespaces="kafka,postgres"
 ```
 
 ## Backup using Configuration Files
