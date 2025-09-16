@@ -48,8 +48,9 @@ aws_access_key_id = <aws_access_key_id>
 aws_secret_access_key = <aws_secret_access_key>
 ```
 
-### install velero
+### Install velero
 
+```bash
 velero install \
     --provider aws \
     --plugins velero/velero-plugin-for-aws:v1.1.0 \
