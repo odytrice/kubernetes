@@ -7,7 +7,7 @@ Cert Manager allows you to manage SSL Certificates. It automatically handles ren
 Simply run the following
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
 ```
 
 ❗ To Delete This you must first delete the resources without the CRDs first otherwise, It will make an absolute mess as the remaining resources will refuse to delete because the CRDS that describe them no longer exist
