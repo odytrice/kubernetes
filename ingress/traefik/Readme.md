@@ -65,3 +65,32 @@ helm template traefik traefik/traefik --namespace ingress-traefik --values ./ing
 ## Install Helm Chart
 helm install traefik traefik/traefik --namespace ingress-traefik --values ./ingress/traefik/bare-metal.yaml
 ```
+
+## HTTPS Redirect Middleware
+
+To automatically redirect HTTP traffic to HTTPS, you can use the included middleware configuration.
+
+### Apply the Middleware
+
+```bash
+kubectl apply -f ./ingress/traefik/https-redirect.yaml
+```
+
+This creates a Traefik middleware named `https-redirect` that permanently redirects all HTTP requests to HTTPS.
+
+### Using the Middleware in an Ingress
+
+To use this middleware with your ingress routes, add the middleware annotation:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-https-redirect@kubernetescrd
+spec:
+  # your ingress rules here
+```
+
+**Note:** The middleware reference format is `<namespace>-<middleware-name>@kubernetescrd`. If you deployed the middleware in a different namespace, adjust the annotation accordingly.
