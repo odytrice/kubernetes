@@ -64,6 +64,8 @@ Documentation on How to setup and Manage a Kubernetes Cluster from Scratch
 
 - [Setup Private Docker Registry](pull-secrets.md)
 
+- [Manage Kubernetes Secrets with Kubeseal](kubeseal.md)
+
 - [Kubectx and Kubens](kubectx.md)
 
 ## Applications
